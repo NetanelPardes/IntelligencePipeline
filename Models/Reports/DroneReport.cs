@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace IntelligencePipeline.Models.Reports
 {
-    internal class DroneReport
+    public class DroneReport: Reports.Report
     {
+        private int _altitude;
+        private int _imageQuality;
+
+        public int Altitude { get; set; } 
+        public int ImageQuality { get; set; }
+
     }
 }
