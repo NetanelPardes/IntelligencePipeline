@@ -8,12 +8,24 @@ namespace IntelligencePipeline.Models.Reports
 {
     public class RadarReport : Reports.Report
     {
-        private int _speed;
-        private int _direction;
-        private int _distance;
+        public int Speed { get; protected set; }
+        public int Direction { get; protected set; }
+        public int Distance { get; protected set; }
 
-        public int Speed { get; set; }
-        public int Direction { get; set; }
-        public int Distance { get; set; }
+        public RadarReport(int reportId, DateTime timestamp, double latitude, double longitude, string description, int speed, int direction, int distance) : base(reportId, timestamp, latitude, longitude, description)
+        {
+            Speed = speed;
+            Direction = direction;
+            Distance = distance;
+        }
+        public override string GetSourceType() => "Radar";
+        public override int CalculateReliabilityScore()
+        {
+            int score = 6;
+            if(Distance >= 500 && Distance <= 30000) { score += 2; }\
+            else if(Distance > 70000) { score -= 2; }
+            if(Speed > = 10 && Speed <= 900) { score += 1; }
+            else if (Speed > 1500) { score -= 2; }
+        }
     }
 }

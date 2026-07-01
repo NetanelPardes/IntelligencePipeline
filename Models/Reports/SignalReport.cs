@@ -14,10 +14,38 @@ namespace IntelligencePipeline.Models.Reports
         private Language _language;
         private int _signalStrength;
 
-        public double Frequency { get; set; } 
-        public string Content { get; set; } 
-        public Language Language { get; set; } 
-        public int SignalStrength { get; set; }
+        public double Frequency 
+        {
+            get => _frequency;
+            set
+            {
+                _frequency = value
+            }
+        } 
+        public string Content 
+        {
+            get => _content;
+            set
+            {
+                _content = value
+            }
+        } 
+        public Language Language 
+        {
+            get => _language;
+            set
+            {
+                _language = value
+            }
+        } 
+        public int SignalStrength 
+        {
+            get => _signalStrength;
+            set
+            {
+                _signalStrength = value
+            }
+        }
 
 
     }
