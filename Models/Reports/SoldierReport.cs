@@ -8,43 +8,30 @@ namespace IntelligencePipeline.Models.Reports
 {
     public class SoldierReport : Reports.Report
     {
-        private string _soldierName;
-        private string _soldierID;
-        private string _unit;
-        private int _confidenceLevel;
+        public string SoldierName { get; protected set; }
+        public string SoldierID { get; }
+        public string Unit { get; protected set; }
+        public int ConfidenceLevel { get; protected set; }
 
-        public string SoldierName 
+        public SoldierReport(DateTime timestamp, double latitude, double longitude, string description, string soldierName, string soldierID, string unit, int confidenceLevel) : base( timestamp, latitude, longitude, description)
         {
-            get => _soldierName;
-            set
-            {
-                _soldierName = value
-            }
+            SoldierName = soldierName;
+            SoldierID = soldierID;
+            Unit = unit;
+            ConfidenceLevel = confidenceLevel;
         }
-        public string SoldierID 
+        public override string GetSourceType() => "Soldier";
+        public override int CalculateReliabilityScore()
         {
-            get => _soldierID;
-            set
+            int score = 4;
+            score += ConfidenceLevel;
+            string my_description = Description.ToLower();
+            if(my_description.Contains("weapon") || my_description.Contains("vehicle") || my_description.Contains("movement") || my_description.Contains("explosion"))
             {
-                _soldierID = value
+                score += 1;
             }
-        }
-        public string Unit 
-        {
-            get => _unit;
-            set
-            {
-                _unit = value
-            }
-        }
-        public int ConfidenceLevel 
-        {
-            get => _confidenceLevel;
-            set
-            {
-                _confidenceLevel = value
-            }
-        }
+            return score;
 
+        }
     }
 }

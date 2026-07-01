@@ -9,44 +9,36 @@ namespace IntelligencePipeline.Models.Reports
 {
     public class SignalReport : Reports.Report
     {
-        private double _frequency;
-        private string _content;
-        private Language _language;
-        private int _signalStrength;
+        public double Frequency { get; protected set; }
+        public string Content { get; protected set; }
+        public Language Language { get; protected set; }
+        public int SignalStrength { get; protected set; }
 
-        public double Frequency 
+        public SignalReport( DateTime timestamp, double latitude,double longitude, string description,double frequency, string content, Language language,int signalStrength): base( timestamp, latitude, longitude, description)
         {
-            get => _frequency;
-            set
-            {
-                _frequency = value
-            }
-        } 
-        public string Content 
-        {
-            get => _content;
-            set
-            {
-                _content = value
-            }
-        } 
-        public Language Language 
-        {
-            get => _language;
-            set
-            {
-                _language = value
-            }
-        } 
-        public int SignalStrength 
-        {
-            get => _signalStrength;
-            set
-            {
-                _signalStrength = value
-            }
+            Frequency = frequency;
+            Content = content;
+            Language = language;
+            SignalStrength = signalStrength;
         }
+        public override string GetSourceType() => "Signal";
+        public override int CalculateReliabilityScore()
+        {
+            int score = 5;
+            if(SignalStrength >= -40) { score += 3; }
+            else if (SignalStrength >= -70) { score += 2; }
+            else if(SignalStrength < -100) { score -= 2; }
+            if(Content.ToLower().Contains("attack") || Content.ToLower().Contains("target") || Content.ToLower().Contains("border") || Content.ToLower().Contains("vehicle"))
+            {
+                score += 1;
+            }
+            return score;
 
-
+        }
+        public override string ToString()
+        {
+            return $"Report ID: {ReportId}\nSource Type: {GetSourceType()}\nTimestamp: {Timestamp}\nLocation: ({Latitude}, {Longitude})\nDescription: {Description}\nStatus: {Status}\n" +
+          $"Priority: {Priority}\nClassification: {Classification}\nReliability Score: {ReliabilityScore}\nRejection Reason: {RejectionReason}\nFrequency: {Frequency}\nContent: {Content}\nLanguage: {Language}\nSignalStrength: {SignalStrength}\n";
+        }
     }
 }

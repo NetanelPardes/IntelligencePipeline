@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using IntelligencePipeline.Models.Reports;
 namespace IntelligencePipeline.Validation
 {
-    internal interface IValidator
+    public interface IValidator
     {
+        public ValidationResult Validate(Report report);
     }
 }

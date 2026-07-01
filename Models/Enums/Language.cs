@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace IntelligencePipeline.Models.Enums
 {
-    internal class Language
+    public enum Language
     {
+        Hebrew,
+        Arabic,
+        English,
+        Russian,
+        Other
     }
+
 }
