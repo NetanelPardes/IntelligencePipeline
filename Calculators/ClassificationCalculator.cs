@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace IntelligencePipeline.Calculators
 {
-    internal class ClassificationCalculator
+    public class ClassificationCalculator
     {
+
     }
 }
