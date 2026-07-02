@@ -9,7 +9,7 @@ namespace IntelligencePipeline.Calculators
 {
     internal class ReliabilityCalculator
     {
-        public int reliabilityCalculate(Report report)
+        public int Calculate(Report report)
         {
             int score = report.CalculateReliabilityScore();
             if (score < 1)

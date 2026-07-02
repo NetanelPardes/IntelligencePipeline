@@ -11,7 +11,7 @@ namespace IntelligencePipeline.Calculators
 {
     public class PriorityCalculator
     {
-        public Priority PriorityCalculate(Report report)
+        public Priority Calculate(Report report)
         {
             if (containsWords(report.Description, "missile", "explosion", "attack", "fire"))
             {
