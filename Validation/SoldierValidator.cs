@@ -28,7 +28,7 @@ namespace IntelligencePipeline.Validation
             {
                 return ValidationResult.Failure("Invalid Unit");
             }
-            else if (soldierReport.ConfidenceLevel > 5 || soldierReport.ConfidenceLevel < 1)
+            else if (soldierReport.ConfidenceLevel < 1 || soldierReport.ConfidenceLevel > 5)
             {
                 return ValidationResult.Failure("Invalid ConfidenceLevel");
             }
